@@ -4,7 +4,9 @@
 The project aims at exploring different techniques for developing a fine grained (high-res) poverty map for Pakistan. 
 The main challenge is the lack of spatially distributed high resolution ground truth labels of poverty. Most available data is at a much coarser resolution (town level/district level). 
 Satellite image at good resolution (spatial and temporal) is freely available for the entire world. Thus we have the aim to develop a model from satellite imagery to poverty labels. i.e., 
-<img src="https://render.githubusercontent.com/render/math?math=f(\text{sat\_imagery}) = \text{poverty labels}">
+$f_{\theta}(sat\\_img) = poverty\\_label$
+
+
 
 
 ## Project Overview
