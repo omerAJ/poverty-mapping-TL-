@@ -71,7 +71,7 @@ Data downloaded for the project is availble in city3 in D://omer/poverty_mapping
 ### Training the Model
 Two stage training process pretraining, and transfer learning
 1. Pretraining code is in train.ipynb
-2. Transfer learning code is in train_poverty.ipynb=
+2. Transfer learning code is in train_poverty.ipynb
 
 
 ## Limitations and Future Work
