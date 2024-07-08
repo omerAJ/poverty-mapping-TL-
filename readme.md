@@ -78,7 +78,7 @@ Two stage training process pretraining, and transfer learning
 - **Limitations:**
   - The major limitation is still the availability of high resolution poverty ground truth. Even transfer learning requires few high quality labels for transfering the model from NTL to Poverty. The Sialkot survey contains data in big ranges and it is insufficient to devise a viable poverty index from this survey. Thus we were unable to transfer our model trained on NTL to effectively map poverty. 
   - Some (talha bhai) say that poverty can't be mapped from satellite imagery at a fine resolution because satellite imagery is just not informative enough for this task, and there are way too many intricacies. 
-  - The paper [High-resolution rural poverty mapping in Pakistan with ensemble deep learning https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0283938] uses very poor quality satellite imagery for training (can be visualized on qgis from the data folder). Further the ground truth in the sindh survey is also with added noise (the noise is greater than the acclaimed high resolution of the generated poverty maps).
+  - The paper [High-resolution rural poverty mapping in Pakistan with ensemble deep learning [2]] uses very poor quality satellite imagery for training (can be visualized on qgis from the data folder). Further the ground truth in the sindh survey is also with added noise (the noise is greater than the acclaimed high resolution of the generated poverty maps).
 
 - **Future Work:**
   - Future work should focus on developing a high reoslution poverty label first e.g., use spatially referenced telecom data to devise poverty index. Or some other way. Defining the dependent variable (y) is the toughest part of this project. 
