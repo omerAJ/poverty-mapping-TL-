@@ -64,7 +64,7 @@ Data downloaded for the project is availble in city3 in D://omer/poverty_mapping
 1. Poverty survey Sialkot {D://omer/poverty_mapping_data/poverty_survey}
 2. NTL for Sialkot {D://omer/poverty_mapping_data/}
 3. Satellite imagery for Sialkot {D://omer/poverty_mapping_data/sat_imagery Sialkot}
-4. Satellite imagery for Sialkot with the corresponding NTL value as its label {D://omer/poverty_mapping_data/clipped_data} (the matching of NTL label and sat imagery was done using QGIS)
+4. Satellite imagery for Sialkot with the corresponding NTL value as its label {D://omer/poverty_mapping_data/clipped_data} (the matching of NTL label and sat imagery was done using QGIS, and python)
 5. Poverty data of districts in Sindh as used in the paper [High-resolution rural poverty mapping in Pakistan with ensemble deep learning [2]] data is in .tif format can be visualized in QGIS. For more details refer to the paper, it also provides additional scripts to process the data. {D://omer/poverty_mapping_data/data_memon}
 
 
