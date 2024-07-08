@@ -9,17 +9,18 @@ import torchvision.transforms.functional as TF
 ### class_counts = {0: 307, 1: 1475, 2: 610}
 
 class customDataset(Dataset):
-    def __init__(self, directory, transform=None, num_crops=1):
+    def __init__(self, directory, transform=None, mode="NTL"):
         """
         Args:
             directory (string): Directory with all the images.
             transform (callable, optional): Optional transform to be applied on a sample.
         """
-        self.num_crops = num_crops
+        # self.num_crops = num_crops
         self.directory = directory
         self.transform = transform
         self.images = [f for f in os.listdir(directory) if f.endswith('.tif')]
-        
+        self.mode = mode
+
     def __len__(self):
         return len(self.images)
     
@@ -29,15 +30,19 @@ class customDataset(Dataset):
         image = Image.open(img_name)  # PIL.Image.open supports TIFF
         image = TF.to_tensor(image)  # Convert PIL image to PyTorch tensor
 
-        class_label = int(self.images[idx].split(',')[0].strip('('))
+        temp=self.images[idx].split(',')[0].strip('(')
+        if self.mode == "survey":
+            class_label = float(temp)
+        else:
+            class_label = int(temp)
         
         if self.transform:
             image = self.transform(image)
         
         return image, class_label
 
-def create_dataloader(directory, batch_size, transform=None):
-    dataset = Dataset(directory=directory, transform=transform)
+def create_dataloader(directory, batch_size, transform=None, mode="NTL"):
+    dataset = customDataset(directory=directory, transform=transform, mode=mode)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     return dataloader
 

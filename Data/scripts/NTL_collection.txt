@@ -1,0 +1,47 @@
+## This code can be used to download NTL imagery for a selected region (this example uses SIALKOT). 
+## Use this in google earth engine (https://code.earthengine.google.com/)
+
+// Import the VIIRS Nighttime Day/Night Band Composites as an ImageCollection for May 2017
+var dataset = ee.ImageCollection('NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG')
+                  .filter(ee.Filter.date('2017-05-01', '2017-05-31'));
+
+// Select the 'avg_rad' band which represents average radiance
+var nighttime = dataset.select('avg_rad');
+
+// Define visualization parameters for displaying the nighttime data
+var nighttimeVis = {min: 0.0, max: 60.0};
+
+// Set the initial map center over Lahore, Pakistan at zoom level 22
+Map.setCenter(74.329376, 31.582045, 22);
+
+// Uncomment the line below to add the nighttime layer to the map
+//Map.addLayer(nighttime, nighttimeVis, 'Nighttime');
+
+// Load a custom asset (Sialkot region) as a FeatureCollection
+var sialkot = ee.FeatureCollection('projects/city-omerabduljalil/assets/sialkot');
+
+// Add the Sialkot region to the map with red color to highlight the area
+Map.addLayer(sialkot, {color: 'red'}, 'Sialkot');
+
+// Center the map view on the Sialkot region
+Map.centerObject(sialkot);
+
+// Import another VIIRS dataset covering a broader time range from 2020 to the present
+var viirsDataset = ee.ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMCFG")
+                     .filterDate('2020-01-01', '2024-12-01')
+                     .select('avg_rad');
+
+// Calculate the mean radiance and clip it to the Sialkot region's boundaries
+var clippedVIIRS = viirsDataset.mean().clip(sialkot);
+
+// Display the processed VIIRS data on the map with a color palette
+Map.addLayer(clippedVIIRS, {min: 0, max: 60, palette: ['black', 'blue', 'green', 'yellow', 'red']}, 'VIIRS Nighttime');
+
+// Export the clipped image to Google Drive as a GeoTIFF file
+Export.image.toDrive({
+  image: clippedVIIRS,
+  description: 'VIIRS_Dataset_ROI2',
+  scale: 500,  // Resolution in meters per pixel
+  region: sialkot.geometry(),  // Specify the export region using the geometry of the Sialkot region
+  fileFormat: 'GeoTIFF'  // Output file format
+});
